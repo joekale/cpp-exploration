@@ -1,4 +1,4 @@
-#include <array>
+#include <vector>
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
@@ -38,7 +38,7 @@ int main([[maybe_unused]] int argc,[[maybe_unused]] char *argv[]){
     for(unsigned int i = 0; i < size; i += 4) {
         __m128i a = _mm_load_si128((__m128i *) (A.data() + i));// load A into a
         __m128i b = _mm_load_si128((__m128i *) (B.data() + i));// load B into b
-        a = _mm_hadd_epi32(a, b);
+        a = _mm_add_epi32(a, b);
         _mm_store_si128((__m128i *) (A.data() + i), a);
     }
 
