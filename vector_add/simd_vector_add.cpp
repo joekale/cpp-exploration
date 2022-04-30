@@ -8,17 +8,15 @@
 #include <immintrin.h>
 
 const size_t size = 100'000'000;
-static std::vector<int> A, B;
 
 int main([[maybe_unused]] int argc,[[maybe_unused]] char *argv[]){
 
-    A.resize(size);
-    B.resize(size);
+    std::vector<int> A(size), B(size);
 
-    auto assign_random = []([[maybe_unused]] const int val) -> int{ return std::rand();};
+    auto assign_random = []() -> int{ return std::rand();};
 
-    std::transform(A.begin(), A.end(), A.begin(), assign_random);
-    std::transform(B.begin(), B.end(), B.begin(), assign_random);
+    std::generate(A.begin(), A.end(), assign_random);
+    std::generate(B.begin(), B.end(), assign_random);
 
     std::cout << "A: ["; 
     for(auto av : std::views::counted(A.begin(), 10)) {
